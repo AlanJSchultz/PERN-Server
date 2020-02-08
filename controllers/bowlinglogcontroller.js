@@ -35,17 +35,7 @@ router.post('/create', function (req, res) {
         date: date
     }).then(
         function createSuccess(logresults) {
-            res.json(logresults)
-                // ballweight: ballweight,
-                // ballbrand: ballbrand,
-                // ballmodel: ballmodel,
-                // bowlingcenter: bowlingcenter,
-                // bowlinglanes: bowlinglanes,
-                // laneconditions: laneconditions,
-                // approachconditions: approachconditions,
-                // comments: comments,
-                // date: date
-            ;
+            res.json(logresults);
         },
         function createError(err) {
             res.send(500, err.message);
