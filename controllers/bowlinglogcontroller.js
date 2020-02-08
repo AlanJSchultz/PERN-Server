@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var sequelize = require('../db');
-var Bowler = sequelize('../models/bowler.js');
+var Bowler = sequelize.import('../models/bowler.js');
 
 var BowlingLogModel = sequelize.import('../models/bowlinglog.js');
 
@@ -17,6 +17,7 @@ router.post('/create', function (req, res) {
     var bowlinglanes = req.body.bowlinglog.bowlinglanes;
     var laneconditions = req.body.bowlinglog.laneconditions;
     var approachconditions = req.body.bowlinglog.approachconditions;
+    var gamesbowled = req.body.bowlinglog.gamesbowled;
     var comments = req.body.bowlinglog.comments;
     var date = req.body.bowlinglog.date;
 
@@ -29,21 +30,22 @@ router.post('/create', function (req, res) {
         bowlinglanes: bowlinglanes,
         laneconditions: laneconditions,
         approachconditions: approachconditions,
+        gamesbowled: gamesbowled,
         comments: comments,
         date: date
     }).then(
-        function createSuccess(ballweight) {
-            res.json({
-                ballweight: ballweight,
-                ballbrand: ballbrand,
-                ballmodel: ballmodel,
-                bowlingcenter: bowlingcenter,
-                bowlinglanes: bowlinglanes,
-                laneconditions: laneconditions,
-                approachconditions: approachconditions,
-                comments: comments,
-                date: date
-            });
+        function createSuccess(logresults) {
+            res.json(logresults)
+                // ballweight: ballweight,
+                // ballbrand: ballbrand,
+                // ballmodel: ballmodel,
+                // bowlingcenter: bowlingcenter,
+                // bowlinglanes: bowlinglanes,
+                // laneconditions: laneconditions,
+                // approachconditions: approachconditions,
+                // comments: comments,
+                // date: date
+            ;
         },
         function createError(err) {
             res.send(500, err.message);
@@ -83,7 +85,7 @@ router.get('/getone/:id', function (req, res) {
 });
 
 // update individual bowler logs by a bowler
-router.put('/update/id', function (req, res) {
+router.put('/update/:id', function (req, res) {
     var owner = req.bowler.id;
     var primaryKey = req.params.id;
     var ballweight = req.body.bowlinglog.ballweight;
@@ -93,6 +95,7 @@ router.put('/update/id', function (req, res) {
     var bowlinglanes = req.body.bowlinglog.bowlinglanes;
     var laneconditions = req.body.bowlinglog.laneconditions;
     var approachconditions = req.body.bowlinglog.approachconditions;
+    var gamesbowled = req.body.bowlinglog.gamesbowled;
     var comments = req.body.bowlinglog.comments;
     var date = req.body.bowlinglog.date;
 
@@ -105,6 +108,7 @@ router.put('/update/id', function (req, res) {
         bowlinglanes: bowlinglanes,
         laneconditions: laneconditions,
         approachconditions: approachconditions,
+        gamesbowled: gamesbowled,
         comments: comments,
         date: date
     },
@@ -118,7 +122,7 @@ router.put('/update/id', function (req, res) {
 });
 
 //  delete individual bowler logs by a bowler
-router.delete('delete/:id', function (req, res) {
+router.delete('/delete/:id', function (req, res) {
     var primaryKey = req.params.id;
     var bowlerid = req.bowler.id;
 

@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         bowlinglanes: DataTypes.STRING,
         laneconditions: DataTypes.STRING,
         approachconditions: DataTypes.STRING,
-        gamesbowled: DataTypes.STRING,
+        gamesbowled: DataTypes.INTEGER,
         comments: DataTypes.STRING,
         date: DataTypes.STRING
     });
