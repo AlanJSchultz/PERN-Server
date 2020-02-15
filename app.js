@@ -19,7 +19,7 @@ app.use(require("./middleware/validate-session"));
 
 app.use('/api/bowlinglog', bowlinglog);
 
-app.listen(4000, function () {
-    console.log('App is listening on port 4000');
+app.listen(process.env.PORT, function () {
+    console.log(`App is listening on port ${process.env.PORT}`);
 });
 

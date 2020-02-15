@@ -1,9 +1,8 @@
 //jshint esversion:6
 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize("bowlinglog", "postgres", "password", {
-    host: "localhost",
-    dialect: "postgres"
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
 });
 
 sequelize
