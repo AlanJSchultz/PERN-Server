@@ -47,7 +47,9 @@ router.post('/create', function (req, res) {
 router.get('/getall', function (req, res) {
     var bowlerid = req.bowler.id;
     BowlingLogModel.findAll({
-        where: { owner: bowlerid }
+        where: { owner: bowlerid },
+        // next line changes order of updatedAt to DESC
+        // order: [['updatedAt', 'DESC']]
     }).then (
         function findAllSuccess(data) {
             res.json(data)
