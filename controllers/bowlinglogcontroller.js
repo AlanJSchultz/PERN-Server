@@ -49,7 +49,7 @@ router.get('/getall', function (req, res) {
     BowlingLogModel.findAll({
         where: { owner: bowlerid },
         // next line changes order of updatedAt to DESC
-        // order: [['updatedAt', 'DESC']]
+        order: [['updatedAt', 'DESC']]
     }).then (
         function findAllSuccess(data) {
             res.json(data)
